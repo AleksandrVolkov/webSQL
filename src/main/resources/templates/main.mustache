@@ -1,0 +1,64 @@
+<html>
+
+<body>
+<!--    <div>-->
+<!--        <form method="post">-->
+<!--            <input type="text" name="text" placeholder="Введите сообщение" />-->
+<!--            <input type="text" name="tag" placeholder="Тэг">-->
+<!--            <button type="submit">Добавить</button>-->
+<!--        </form>-->
+<!--    </div>-->
+<!--    <div>Список сообщений</div>-->
+<!--    <form method="post" action="filter">-->
+<!--        <input type="text" name="filter">-->
+<!--        <button type="submit">Найти</button>-->
+<!--    </form>-->
+        <!--    {{#users}}-->
+<!--    <div>-->
+<!--        <b>{{id}}</b>-->
+<!--        <span>{{firstName}}</span>-->
+<!--        <i>{{lastName}}</i>-->
+<!--        -->
+<!--    </div>-->
+        <!--    {{/users}}-->
+<div>
+    <table>
+        <tr>
+            <th>id</th>
+            <th>firstName</th>
+            <th>lastName</th>
+            <th>login</th>
+        </tr>
+        {{#users}}
+            <tr>
+                <td>{{ id }}</td>
+                <td>{{ firstName }}</td>
+                <td>{{ lastName }}</td>
+                <td>{{ login }}</td>
+<!--                <td><form method="post" action="edit">-->
+<!--                    <input type="text" name="id" value="{{ id }}" hidden/>-->
+<!--                    <input type="text" name="firstName" placeholder="Введите имя" />-->
+<!--                    <input type="text" name="lastName" placeholder="Введите фамилию" />-->
+<!--                    <input type="text" name="login" placeholder="Введите логин" />-->
+<!--                    <button type="submit">Редактировать</button>-->
+<!--                </form></td>-->
+                <td><form method="post" action="remove">
+                    <input type="text" name="id" value="{{ id }}" hidden/>
+                    <button type="submit">Удалить</button>
+                </form></td>
+
+            </tr>
+        {{/users}}
+    </table>
+</div>
+
+<div>
+    <form method="post" action="add">
+        <input type="text" name="firstName" placeholder="Введите имя" />
+        <input type="text" name="lastName" placeholder="Введите фамилию" />
+        <input type="text" name="login" placeholder="Введите логин" />
+        <button type="submit">Добавить</button>
+    </form>
+</div>
+</body>
+</html>
