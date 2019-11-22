@@ -65,7 +65,7 @@ public class GreetingController {
 ////        usersRepo.deleteById(Long.parseLong(id));
 //        Users user = new Users(firstName, lastName, login);
 ////        user.setId(Long.parseLong(id));
-//        usersRepo.deleteById(Long.parseLong(id));
+////        usersRepo.deleteById(Long.parseLong(id));
 //        usersRepo.save(user);
 //        Iterable<Users> users = usersRepo.findAll();
 //
