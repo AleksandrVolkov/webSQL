@@ -60,17 +60,15 @@ public class GreetingController {
         return "main";
     }
 
-//    @PostMapping("/edit")
-//    public String edit(@RequestParam String id, @RequestParam String firstName, @RequestParam String lastName, @RequestParam String login, Map<String, Object> model) {
-////        usersRepo.deleteById(Long.parseLong(id));
-//        Users user = new Users(firstName, lastName, login);
-////        user.setId(Long.parseLong(id));
-////        usersRepo.deleteById(Long.parseLong(id));
-//        usersRepo.save(user);
-//        Iterable<Users> users = usersRepo.findAll();
-//
-//        model.put("users", users);
-//        return "main";
-//    }
+    @PostMapping("/edit")
+    public String edit(@RequestParam String id, @RequestParam String firstName, @RequestParam String lastName, @RequestParam String login, Map<String, Object> model) {
+        usersRepo.findById(Long.parseLong(id)).get().setFirstName(firstName);
+        usersRepo.findById(Long.parseLong(id)).get().setLastName(lastName);
+        usersRepo.findById(Long.parseLong(id)).get().setLogin(login);
+        Iterable<Users> users = usersRepo.findAll();
+
+        model.put("users", users);
+        return "main";
+    }
 
 }
