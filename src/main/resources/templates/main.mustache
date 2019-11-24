@@ -2,6 +2,14 @@
 
 <body>
 <div>
+    <form action="/logout" method="post">
+
+        <input type="hidden" name="_csrf" value="{{_csrf.token}}" />
+
+        <input type="submit" value="Sign Out"/>
+    </form>
+</div>
+<div>
     <table>
         <tr>
             <th>id</th>
@@ -15,17 +23,27 @@
                 <td>{{ firstName }}</td>
                 <td>{{ lastName }}</td>
                 <td>{{ login }}</td>
-                <td><form method="post" action="edit">
-                    <input type="text" name="id" value="{{ id }}" hidden/>
-                    <input type="text" name="firstName" placeholder="Введите имя" />
-                    <input type="text" name="lastName" placeholder="Введите фамилию" />
-                    <input type="text" name="login" placeholder="Введите логин" />
-                    <button type="submit">Редактировать</button>
-                </form></td>
-                <td><form method="post" action="remove">
-                    <input type="text" name="id" value="{{ id }}" hidden/>
-                    <button type="submit">Удалить</button>
-                </form></td>
+                <td>
+                    <form method="post" action="edit">
+
+                        <input type="hidden" name="_csrf" value="{{_csrf.token}}" />
+
+                        <input type="text" name="id" value="{{ id }}" hidden/>
+                        <input type="text" name="firstName" placeholder="Введите имя"/>
+                        <input type="text" name="lastName" placeholder="Введите фамилию"/>
+                        <input type="text" name="login" placeholder="Введите логин"/>
+                        <button type="submit">Редактировать</button>
+                    </form>
+                </td>
+                <td>
+                    <form method="post" action="remove">
+
+                        <input type="hidden" name="_csrf" value="{{_csrf.token}}" />
+
+                        <input type="text" name="id" value="{{ id }}" hidden/>
+                        <button type="submit">Удалить</button>
+                    </form>
+                </td>
 
             </tr>
         {{/users}}
@@ -34,9 +52,12 @@
 
 <div>
     <form method="post" action="add">
-        <input type="text" name="firstName" placeholder="Введите имя" />
-        <input type="text" name="lastName" placeholder="Введите фамилию" />
-        <input type="text" name="login" placeholder="Введите логин" />
+
+        <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
+
+        <input type="text" name="firstName" placeholder="Введите имя"/>
+        <input type="text" name="lastName" placeholder="Введите фамилию"/>
+        <input type="text" name="login" placeholder="Введите логин"/>
         <button type="submit">Добавить</button>
     </form>
 </div>
