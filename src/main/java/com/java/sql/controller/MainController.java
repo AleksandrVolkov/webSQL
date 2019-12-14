@@ -1,14 +1,21 @@
 package com.java.sql.controller;
 
 
+import com.java.sql.domain.Post;
 import com.java.sql.domain.Users;
+import com.java.sql.repos.PostRepo;
 import com.java.sql.repos.UsersRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.client.RestTemplate;
 
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -67,4 +74,35 @@ public class MainController {
         return "main";
     }
 
+
+    @Autowired
+    private PostRepo postRepo;
+
+
+    @PostMapping("/add_api")
+    public String add_api(Map<String, Object> model) {
+        RestTemplate restTemplate = new RestTemplate();
+        ResponseEntity<List<Post>> rateResponse =
+                restTemplate.exchange("http://jsonplaceholder.typicode.com/posts?_limit=10",
+                        HttpMethod.GET, null, new ParameterizedTypeReference<List<Post>>() {
+                        });
+        List<Post> postsList = rateResponse.getBody();
+
+        for (Post p : postsList) {
+            Post post = new Post( p.getTitle(), p.getBody(), p.getUserId());
+            postRepo.save(post);
+        }
+        Iterable<Post> posts = postRepo.findAll();
+
+        model.put("posts", posts);
+
+        return "main";
+    }
+    @PostMapping("/remove_all_api")
+    public String remove_api(Map<String, Object> model) {
+        try {
+            postRepo.deleteAll();
+        }catch (Exception e){}
+        return "main";
+    }
 }

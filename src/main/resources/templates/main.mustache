@@ -1,14 +1,7 @@
 <html>
 
 <body>
-<div>
-    <form action="/logout" method="post">
 
-        <input type="hidden" name="_csrf" value="{{_csrf.token}}" />
-
-        <input type="submit" value="Sign Out"/>
-    </form>
-</div>
 <div>
     <table>
         <tr>
@@ -26,7 +19,7 @@
                 <td>
                     <form method="post" action="edit">
 
-                        <input type="hidden" name="_csrf" value="{{_csrf.token}}" />
+                        <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
 
                         <input type="text" name="id" value="{{ id }}" hidden/>
                         <input type="text" name="firstName" placeholder="Введите имя"/>
@@ -38,7 +31,7 @@
                 <td>
                     <form method="post" action="remove">
 
-                        <input type="hidden" name="_csrf" value="{{_csrf.token}}" />
+                        <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
 
                         <input type="text" name="id" value="{{ id }}" hidden/>
                         <button type="submit">Удалить</button>
@@ -61,5 +54,43 @@
         <button type="submit">Добавить</button>
     </form>
 </div>
+<div>
+    <form action="/logout" method="post">
+
+        <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
+
+        <input type="submit" value="Sign Out"/>
+    </form>
+
+    <div>
+        <table>
+            <tr>
+                <th>id</th>
+                <th>title</th>
+                <th>body</th>
+                <th>userId</th>
+            </tr>
+            {{#posts}}
+                <tr>
+                    <td>{{ id }}</td>
+                    <td>{{ title }}</td>
+                    <td>{{ body }}</td>
+                    <td>{{ userId }}</td>
+                </tr>
+            {{/posts}}
+        </table>
+    </div>
+    <div>
+        <form action="/add_api" method="post">
+            <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
+            <input type="submit" value="add api"/>
+        </form>
+    </div>
+    <div>
+        <form action="/remove_all_api" method="post">
+            <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
+            <input type="submit" value="remove all api"/>
+        </form>
+    </div>
 </body>
 </html>
